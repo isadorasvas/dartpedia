@@ -224,37 +224,154 @@ void printUsage() { // Add this new function
 }
 
 ==========================================================================================================================================
+v1.7. 2026-04-13 - Isadora Vasconcelos
+        - O código agora solicita o título do artigo via stdin.readLineSync() caso não seja fornecido por argumento. Foi adicionada a importação dart:io e o uso do
+        operador ?? para garantir que a variável articleTitle nunca seja nula.
+
+        Código:
+
+        // import 'package:cli/cli.dart' as cli; // Delete this entire line
+        import 'dart:io'; // Add this line at the top  
+
+        void printUsage() { // Add this new function
+         print(
+         "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'"
+          );
+        }
+
+        const version = '0.0.6'
+
+        void main(List<String> arguments) {
+          if (arguments.isEmpty || arguments.first == 'help') {
+           printUsage();
+         } else if (arguments.first == 'version') {
+           print('Dartpedia CLI version $version');
+         } else if (arguments.first == 'search') {
+          // Add this new block:
+         final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+          searchWikipedia(inputArgs);
+         } else {
+           printUsage();
+         }
+        }
+
+        void searchWikipedia(List<String>? arguments) {
+         final String articleTitle;
+
+         // If the user didn't pass in arguments, request an article title.
+         if (arguments == null || arguments.isEmpty) {
+           print('Please provide an article title.');
+           // Await input and provide a default empty string if the input is null.
+          articleTitle = stdin.readLineSync() ?? '';
+         } else {
+          // Otherwise, join the arguments into a single string.
+         articleTitle = arguments.join(' ');
+         }
+
+        print('Current article title: $articleTitle');
+        }
+
+===========================================================================
+        v1.8. 2026-04-14 - Isadora Vasconcelos:
+        - Atualização do searchWikipedia para exibir mensagens que indiquem que nosso programa encontrou algo. Para que haja melhor visualização do que nosso programa final fara sem precisar compila-lo
+          completamente agora. Voce so vera essas mensagens se incluir uma consulta de pesquisa ao executar o programa.
+               
+        Código:
+
+        // import 'package:cli/cli.dart as cli;
+        import 'dart:io'; // Add this line at the top
+
+        void printUsage() { // Add this new function
+         print(
+           "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'"
+         );
+        }
+
+        const version = '0.0.7';
+
+        void main(List<String> arguments) {
+          if (arguments.isEmpty || arguments.first == 'help') {
+           printUsage();
+          } else if (arguments.first == 'version') {
+           print('Dartpedia CLI version $version');
+          } else if (arguments.first == 'search') {
+           // Add this new block:
+           final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+           searchWikipedia(inputArgs);
+         } else {
+           printUsage();
+         }
+        }
+
+        void searchWikipedia(List<String>? arguments) {
+         final String articleTitle;
+
+         // If the user didn't pass in arguments, request an article title.
+         if (arguments == null || arguments.isEmpty) {
+          print('Please provide an article title.');
+         // Await input and provide a default empty string if the input is null.
+          articleTitle = stdin.readLineSync() ?? '';
+         } else {
+          // Otherwise, join the arguments into the CLI into a single string
+          articleTitle = arguments.join(' ');
+         }
+
+         print('Looking up articles about "$articleTitle". Please wait.');
+         print('Here ya go!');
+        print('(Pretend this is an article about "$articleTitle")');
+        }
+
+        Saida com "dart bin/cli.dart search Dart Programming" : Looking up articles about "Dart Programming". Please wait.
+        Here ya go!
+        (Pretend this is an article about "Dart Programming")
+       
+        Saida com "dart bin/cli.dart search" : Please provide an article title.
+==============================================================================
 */
 
 
 
-// Codigo valido ate o momento !!
+// import 'package:cli/cli.dart' as cli; // Delete this entire line
+import 'dart:io'; // Add this line at the top
 
-// Codigo:
+void printUsage() { // Add this new function
+  print(
+    "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'"
+  );
+}
 
-const version = '0.0.6'; // <-- Adicionado esta linha na versao '0.0.2'
+const version = '0.0.7';
+
 
 void main(List<String> arguments) {
-	if (arguments.isEmpty || arguments.first == 'help') {
-		printUsage();
-	} else if (arguments.first == 'version') {
-		print('Dartpedia CLI version $version');
-	} else if (arguments.first == 'search') {
-	// <-- Adicionado este bloco de codigo na versao '0.0.6:
-	final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
-		searchWikipedia(inputArgs);
-	} else {
-		printUsage();
-	}
+  if (arguments.isEmpty || arguments.first == 'help') {
+    printUsage();
+  } else if (arguments.first == 'version') {
+    print('Dartpedia CLI version $version');
+  } else if (arguments.first == 'search') {
+    // Add this new block:
+    final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+    searchWikipedia(inputArgs);
+  } else {
+    printUsage();
+  }
 }
 
-void searchWikipedia(List<String>? arguments) { // <-- Adicionado esta nova funcao e argumento do tipo "?" na versao '0.0.6' 
-print('searchWikipedia received arguments: $arguments');
-}
+void searchWikipedia(List<String>? arguments) {
+  final String articleTitle;
 
-void printUsage() { // <-- Adicionado esta funcao na versao '0.0.3' e '0.0.4'
-	print(
-	"The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'");
-}
+  // If the user didn't pass in arguments, request an article title.
+  if (arguments == null || arguments.isEmpty) {
+    print('Please provide an article title.');
+    // Await input and provide a default empty string if the input is null.
+    articleTitle = stdin.readLineSync() ?? '';
+  } else {
+    // Otherwise, join the arguments into the CLI into a single string
+    articleTitle = arguments.join(' ');
+  }
 
+  print('Looking up articles about "$articleTitle". Please wait.');
+  print('Here ya go!');
+  print('(Pretend this is an article about "$articleTitle")');
+}
 
