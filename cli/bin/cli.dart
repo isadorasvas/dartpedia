@@ -381,3 +381,5 @@ Isadora
 Tarefa 1:
 Tarefa 2:
 
+import 'dart:io';
+import 'package:http/http.dart' as http; // Add this line
