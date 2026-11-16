@@ -1,4 +1,4 @@
-# 🎯 dartpedia
+#  dartpedia
 
 Repositório de estudos seguindo o [tutorial oficial do Dart](https://dart.dev/learn/tutorial), que guia o desenvolvimento de uma aplicação CLI completa do zero.
 
@@ -10,7 +10,7 @@ O **dartpedia** acompanha cada capítulo do tutorial da linguagem Dart, construi
 
 ---
 
-## 🗂️ Estrutura do repositório
+##  Estrutura do repositório
 
 ```
 dartpedia/
@@ -20,7 +20,7 @@ dartpedia/
 
 ---
 
-## 🚀 Como executar
+##  Como executar
 
 ### Pré-requisitos
 
@@ -48,7 +48,7 @@ dart run
 
 ---
 
-## 📚 Conteúdo do tutorial
+##  Conteúdo do tutorial
 
 Os capítulos cobertos neste repositório incluem:
 
@@ -69,14 +69,14 @@ Os capítulos cobertos neste repositório incluem:
 
 ---
 
-## 🛠️ Tecnologias
+##  Tecnologias
 
 - **Linguagem:** [Dart](https://dart.dev/)
 - **SDK mínimo:** Dart 3.x
 
 ---
 
-## 🔗 Referências
+##  Referências
 
 - [Tutorial oficial do Dart](https://dart.dev/learn/tutorial)
 - [Documentação do Dart](https://dart.dev/docs)
